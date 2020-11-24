@@ -17,6 +17,7 @@ class MainPage extends Component {
     }
 
     async componentDidMount() {
+        //window.localStorage.clear();
         const response = await fetch("http://localhost:8080/allFilms");
         const json = await response.json();
         this.setState({

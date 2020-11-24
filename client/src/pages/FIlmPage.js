@@ -200,7 +200,8 @@ class FilmPage extends Component {
                             positive={item.positive}
                             username={item.username}
                             review={item.review}
-                            rating={item.rating}/>
+                            rating={item.rating}
+                            review_id={item.id}/>
                         )
                     }) : ''}
 

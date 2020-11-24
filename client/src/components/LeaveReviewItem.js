@@ -30,6 +30,7 @@ async function handleSendReview(description, rating, user) {
     }).catch((error) => {
         console.error(error);
     });
+    window.location.reload();
 }
 
 const LeaveReviewItem = ({filmId}) => {
