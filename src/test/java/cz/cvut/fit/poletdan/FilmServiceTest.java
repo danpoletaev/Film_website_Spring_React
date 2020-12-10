@@ -2,6 +2,7 @@ package cz.cvut.fit.poletdan;
 
 import cz.cvut.fit.poletdan.model.Film;
 import cz.cvut.fit.poletdan.repository.FilmRepository;
+import cz.cvut.fit.poletdan.service.FilmService;
 import cz.cvut.fit.poletdan.service.FilmServiceImpl;
 import cz.cvut.fit.poletdan.service.UserServiceImpl;
 import org.junit.After;
@@ -28,6 +29,9 @@ public class FilmServiceTest {
 
     @Autowired
     FilmRepository filmRepository;
+
+    @Autowired
+    FilmService filmService;
 
     @Before
     public void addFilm() {
@@ -95,15 +99,16 @@ public class FilmServiceTest {
 
     @Test
     public void on_rating_update_test(){
-        service.updateRatingById(1l, 7.834);
-        Optional<Film> film = service.findFilmById(1l);
+        List<Film> films = filmService.getAll();
+        service.updateRatingById(films.get(0).getId(), 7.834);
+        Optional<Film> film = service.findFilmById(films.get(0).getId());
 
         assertThat(film.isPresent()).isEqualTo(true);
 
         assertThat(film.get().getRating()).isEqualTo(6.417);
 
-        service.updateRatingById(1l, 5.0);
-        film = service.findFilmById(1l);
+        service.updateRatingById(films.get(0).getId(), 5.0);
+        film = service.findFilmById(films.get(0).getId());
         assertThat(film.isPresent()).isEqualTo(true);
         assertThat(film.get().getRating()).isEqualTo(5.7085);
     }
