@@ -21,8 +21,6 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
     @Override
     List<Film> findAll();
 
-
-
     @Modifying(flushAutomatically = true)
     @Query("update Film f set f.rating = :rating where f.id = :id")
     void updateRating(@Param("id") Long id, @Param("rating") double rating);

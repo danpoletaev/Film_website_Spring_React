@@ -1,7 +1,6 @@
 package cz.cvut.fit.poletdan.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class Film {
@@ -17,7 +16,7 @@ public class Film {
     private String composer;
     private String budget;
     private String box_office;
-    private String DVD_release;
+    private String dvd_release;
     private String duration;
     private String picture_url;
     private String youtube_video_id;
@@ -25,7 +24,7 @@ public class Film {
     private double rating;
     private String year;
 
-    public Film(String name, String country, String genre, String motto, String producer, String screenwriter, String operator, String composer, String budget, String box_office, String DVD_release, String duration, String picture_url, String youtube_video_id, String description, double rating) {
+    public Film(String name, String country, String genre, String motto, String producer, String screenwriter, String operator, String composer, String budget, String box_office, String dvd_release, String duration, String picture_url, String youtube_video_id, String description, double rating) {
         this.name = name;
         this.country = country;
         this.genre = genre;
@@ -36,7 +35,7 @@ public class Film {
         this.composer = composer;
         this.budget = budget;
         this.box_office = box_office;
-        this.DVD_release = DVD_release;
+        this.dvd_release = dvd_release;
         this.duration = duration;
         this.picture_url = picture_url;
         this.youtube_video_id = youtube_video_id;
@@ -127,11 +126,11 @@ public class Film {
     }
 
     public String getDVD_release() {
-        return DVD_release;
+        return dvd_release;
     }
 
     public void setDVD_release(String DVD_release) {
-        this.DVD_release = DVD_release;
+        this.dvd_release = DVD_release;
     }
 
     public String getDuration() {
