@@ -100,12 +100,12 @@ public class FilmServiceTest {
 
         assertThat(film.isPresent()).isEqualTo(true);
 
-        assertThat(film.get().getRating()).isEqualTo(7.834);
+        assertThat(film.get().getRating()).isEqualTo(6.417);
 
         service.updateRatingById(1l, 5.0);
         film = service.findFilmById(1l);
         assertThat(film.isPresent()).isEqualTo(true);
-        assertThat(film.get().getRating()).isEqualTo(5.0);
+        assertThat(film.get().getRating()).isEqualTo(5.7085);
     }
 
     @Test
