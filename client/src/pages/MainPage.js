@@ -2,10 +2,7 @@ import React, {Component} from "react"
 import {Container, Row, Col} from "react-bootstrap"
 import Divider from '@material-ui/core/Divider';
 
-
-import FilmListItem from "../components/FilmListItem";
-import ReviewItem from "../components/Review";
-
+import FilmListItem from "../components/FilmListItem"
 
 class MainPage extends Component {
     constructor(props) {
