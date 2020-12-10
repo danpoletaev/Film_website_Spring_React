@@ -1,9 +1,9 @@
-package com.example.demo1.service;
+package cz.cvut.fit.poletdan.service;
 
-import com.example.demo1.model.Role;
-import com.example.demo1.model.User;
-import com.example.demo1.repository.UserRepository;
-import com.example.demo1.web.dto.UserRegistrationDTO;
+import cz.cvut.fit.poletdan.dto.UserRegistrationDTO;
+import cz.cvut.fit.poletdan.model.Role;
+import cz.cvut.fit.poletdan.model.User;
+import cz.cvut.fit.poletdan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,9 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,13 +28,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User save(UserRegistrationDTO registrationDTO) {
-        User user = new User(
-                registrationDTO.getEmail(),
-                passwordEncoder.encode(registrationDTO.getPassword()),
-                Arrays.asList(new Role("ROLE_USER")));
-
+    public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> getByEmail(String email) {
+        Optional<User> optionalUser = userRepository.getByEmail(email);
+        return optionalUser;
     }
 
     @Override

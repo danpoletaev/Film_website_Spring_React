@@ -4,7 +4,7 @@ import 'react-responsive-modal/styles.css';
 import {Modal} from 'react-responsive-modal';
 
 const CustomNav = () => {
-    // localStorage.clear()
+    //localStorage.clear()
     const [openLogin, setOpenLogin] = useState(false);
     const onLoginOpenModal = () => setOpenLogin(true);
     const onCloseLoginModal = () => setOpenLogin(false);
@@ -17,7 +17,6 @@ const CustomNav = () => {
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
-            console.log(loggedInUser)
             setAuthenticated(true);
             setUser(loggedInUser);
         }
@@ -57,6 +56,7 @@ const CustomNav = () => {
         else {
             setAuthenticated(true);
             localStorage.setItem('user', json.username)
+            localStorage.setItem('user_id', json.id)
             setOpenLogin(false);
         }
     }
@@ -78,7 +78,8 @@ const CustomNav = () => {
             console.error(error);
         });
         const json = await response.json();
-        setRegistered(json);
+        console.log(json)
+        setRegistered(json)
         setOpenReg(false);
         setOpenLogin(true);
     }

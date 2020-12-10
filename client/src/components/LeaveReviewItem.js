@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 
-async function handleSendReview(description, rating, user) {
+async function handleSendReview(description, rating, userId, setExists) {
     let positive = false;
     if (rating >= 5)
         positive = true;
@@ -21,7 +21,7 @@ async function handleSendReview(description, rating, user) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: user,
+            user_id: userId,
             positive: positive,
             review: description,
             rating: rating,
@@ -30,7 +30,12 @@ async function handleSendReview(description, rating, user) {
     }).catch((error) => {
         console.error(error);
     });
-    window.location.reload();
+    const json = await response.json();
+    console.log(json);
+    if (json != false)
+        window.location.reload();
+    else
+        setExists(true)
 }
 
 const LeaveReviewItem = ({filmId}) => {
@@ -38,11 +43,15 @@ const LeaveReviewItem = ({filmId}) => {
     const [rating, setRating] = useState(5);
     const [description, setDescription] = useState("");
     const [user, setUser] = useState();
+    const [userId, setUserId] = useState();
+    const [exists, setExists] = useState(false);
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
+        const user_id = localStorage.getItem("user_id")
         if (loggedInUser) {
             setUser(loggedInUser);
+            setUserId(user_id)
         }
     }, []);
 
@@ -90,9 +99,18 @@ const LeaveReviewItem = ({filmId}) => {
             <Row>
                 <Col md={12}>
                     <Button style={{marginBottom: '20px', marginLeft: '40%'}} variant="primary"
-                            onClick={() => handleSendReview(description, rating, user)}>Submit a review</Button>
+                            onClick={() => handleSendReview(description, rating, userId, setExists)}>Submit a review</Button>
                 </Col>
             </Row>
+            {exists ? (
+                <Row>
+                    <Col>
+                        <p style={{fontSize: '18px', color: 'red', textAlign: 'center'}}>You cannot upload new review,
+                            because you already have one ;( Edit or delete previous review!</p>
+                    </Col>
+                </Row>
+                ) : ''}
+
         </Container>
     )
 }

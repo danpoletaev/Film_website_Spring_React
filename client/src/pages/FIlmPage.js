@@ -63,7 +63,7 @@ class FilmPage extends Component {
             width: '960',
             playerVars: {
                 // https://developers.google.com/youtube/player_parameters
-                autoplay: 1,
+                autoplay: 0,
             },
         };
 
@@ -195,10 +195,11 @@ class FilmPage extends Component {
 
 
                     {this.state.reviews ? this.state.reviews.map(item => {
+                        console.log(this.state.reviews)
                         return (
                         <ReviewItem
                             positive={item.positive}
-                            username={item.username}
+                            username={item.user.username}
                             review={item.review}
                             rating={item.rating}
                             review_id={item.id}/>

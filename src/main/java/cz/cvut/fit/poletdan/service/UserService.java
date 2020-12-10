@@ -1,9 +1,11 @@
-package com.example.demo1.service;
+package cz.cvut.fit.poletdan.service;
 
-import com.example.demo1.model.User;
-import com.example.demo1.web.dto.UserRegistrationDTO;
+import cz.cvut.fit.poletdan.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.Optional;
+
 public interface UserService extends UserDetailsService {
-    User save(UserRegistrationDTO registrationDTO);
+    User save(User user);
+    Optional<User> getByEmail(String email);
 }
